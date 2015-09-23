@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LifeStyle</title>
+		
+		<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+		<style type="text/css">
+
+			#query15,#query14,#query16,#query17,#query17_1,#query16_1
+			{
+			    display:none;
+			}
+			
+
+
+		</style>
+
+	</head>
+
+	<body>
+		<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<div class="container">
+			<div class='row'>
+				<div class='col-lg-5'>
+					<h1>Welcome to LifeStyle</h1>
+					<p>This is the place where you can find information about the right type of food for your LifeStyle.</code></p>
+				</div>
+				
+			</div>
+			<hr>
+			<div class='row'>
+				<div class='col-lg-6'>
+					<h3>Food type <small>Check your right type of food!</small></h3>
+					<p>Here you get examples about what type of food fits your LifeStyle best. This information is based on data we have collected so far.</p>
+					<form role='form'>
+						<div class='form-group'>
+							<label for='messageInput1'>What is your LifeStyle?</label>
+							<input type='text' class='form-control' id='messageInput1' placeholder='Type some nifty message'>
+						</div>
+					</form>
+					<div><a id="link4" class='btn btn-primary'>Check</a></div>
+				</div>
+				<div class='col-lg-6'>
+					<h3>Output</h3>
+					<div id="linktarget4" class='well'>This is where your message will appear.</div>
+				</div>
+			</div>
+			
+			
+			
+			<hr>
+			<div class='row'>
+				<div class='col-lg-6'>
+					<h3>Our Clients <small>Meet out clients</small></h3>
+					<p>Here you can see our clients. Their data will be displayed on the right side.</p>
+					<textarea id='query15' class='sparql' style='width: 100%' rows='10'>
+PREFIX dp: <http://www.LifeStyle.org/>
+
+SELECT ?client WHERE{
+  ?client rdf:type dp:People.
+}
+					</textarea>
+					<p>Click the buttons to <em>GET</em> the query from our triple store</p>
+					<div><a id="link15" class='btn btn-primary'>Clients</a></div>
+					
+				</div>
+				<div class='col-lg-6'>
+					<h3>Clients</h3>
+					<div id="linktarget14" class='well' style='height: 15em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
+				</div>
+			</div>
+
+			<hr>
+			<div class='row'>
+				<div class='col-lg-6'>
+					<h3>Consumption <small>Out clients Consumption</small></h3>
+					<p>Get inspired from our role models.</p>
+					<p>Here you can see our client's consumption in relation with their LifeStyle.</p>
+					<hr>
+					<p>You can require the data with Inferencing OF or ON. </p>
+					<p>With Inferencing ON, you will receave all the individuals which have something in commun with our clients. Some of these properties are deducted by the reasoner from the existing properties.</p>
+					<p>When the Inferencing is OF, the results will be just the individuals with the existing relations(original relations).</p>
+
+					<textarea id='query16' class='sparql' style='width: 100%' rows='10'>
+PREFIX dp: <http://www.LifeStyle.org/>
+
+SELECT ?Consuming {
+  dp:Luke dp:isConsuming ?Consuming.
+}
+					</textarea>
+					<textarea id='query16_1' class='sparql' style='width: 100%' rows='10'>
+PREFIX dp: <http://www.LifeStyle.org/>
+
+SELECT DISTINCT ?LifeStyle{
+  dp:Luke dp:hasLifeStyle ?LifeStyle.
+}
+					</textarea>
+					<textarea id='query17' class='sparql' style='width: 100%' rows='10'>
+PREFIX dp: <http://www.LifeStyle.org/>
+
+SELECT DISTINCT ?Consuming{
+  dp:Sheila dp:isConsuming ?Consuming.
+}
+					</textarea>
+					<textarea id='query17_1' class='sparql' style='width: 100%' rows='10'>
+PREFIX dp: <http://www.LifeStyle.org/>
+
+SELECT DISTINCT ?LifeStyle{
+  dp:Sheila dp:hasLifeStyle ?LifeStyle.
+}
+					</textarea>
+					<p>Choose the state of the Reasoner!</p>
+					 <select id='combo'>
+					  <option value="on">Inferencing ON</option>
+					  <option value="of">Inferencing OF</option>
+					</select> 
+					<hr>
+					<p>Click the buttons to <em>GET</em> the query from our triple store</p>
+					<div><a id="link16" class='btn btn-primary'>Luke</a><a id="link17" class='btn btn-primary'>Sheila</a></div>
+					
+
+				</div>
+				<div class='col-lg-6'>
+					<h3>Client's consumption</h3>
+					<div id="linktarget15" class='well' style='height: 17em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
+					<h3>Client's LifeStyle</h3>
+					<div id="style"  class='well' style='height: 17em; scroll: both; overflow: auto;'>This is where the server response will appear.</div>
+				</div>
+			</div>
+			<hr>
+
+			
+
+
+		</div>
+
+		<script src='{{ url_for("static", filename="js/jquery-1.11.0.min.js") }}' type='text/javascript'></script>
+		<script src='{{ url_for("static", filename="js/tutorial.js") }}' type='text/javascript'></script>
+
+
+	</body>
+</head>
